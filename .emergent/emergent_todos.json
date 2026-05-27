@@ -1,0 +1,14 @@
+[
+  {
+    "content": "Analyze frontend build error and identify root cause",
+    "status": "completed"
+  },
+  {
+    "content": "Verify the Dockerfile and build configuration used",
+    "status": "completed"
+  },
+  {
+    "content": "Provide recommendation for fix",
+    "status": "in_progress"
+  }
+]

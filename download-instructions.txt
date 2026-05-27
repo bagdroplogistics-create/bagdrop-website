@@ -1,0 +1,23 @@
+BAGDROP WEBSITE FILES FOR GODADDY
+===================================
+
+The 3 main files you need are located at:
+
+1. /app/frontend/build/index.html (3.3 KB)
+2. /app/frontend/build/static/css/main.37ab5f59.css (63 KB)  
+3. /app/frontend/build/static/js/main.40b4d176.js (522 KB)
+
+OPTION 1: Download via Emergent Interface
+- Look for "Files" or "File Browser" in your Emergent workspace
+- Navigate to the paths above
+- Download each file
+
+OPTION 2: Copy File Contents
+I can show you the full content of each file to copy-paste.
+Let me know if you need this.
+
+OPTION 3: Use the ZIP file
+The complete ready-to-upload package is at:
+/app/frontend/bagdrop-godaddy-upload.zip
+
+All 8 files are inside this ZIP (795 KB total).
