@@ -35,11 +35,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "cra-template": "1.2.0",
-<<<<<<< HEAD
     "date-fns": "3",
-=======
-    
->>>>>>> c6b7b98665aabbf01a36abe56ed39d573ed80e97
     "dotenv": "^17.2.3",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
