@@ -15,6 +15,7 @@ const Header = ({ onBookNow }) => {
   const dropdownTimeoutRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [showBooking, setShowBooking] = useState(false);
 
   const scrollToSection = (sectionId) => {
     if (location.pathname !== '/') {
@@ -243,7 +244,14 @@ const handleExploreMouseLeave = () => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider> */}
-            <a
+            <button onClick={() => setShowBooking(true)}>
+               Book Now
+            </button>
+            <BookingModal
+              isOpen={showBooking}
+              onClose={() => setShowBooking(false)}
+            />
+            {/* <a
                 href="https://bag-drop-app2.vercel.app/login" target="_blank" onclick="return gtag_report_conversion('https://bag-drop-app2.vercel.app/login');"
                 className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
               >
@@ -254,7 +262,7 @@ const handleExploreMouseLeave = () => {
                 className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
               >
                 Call Now
-              </a>
+              </a> */}
           </div>
 
           {/* Mobile Menu Button */}
