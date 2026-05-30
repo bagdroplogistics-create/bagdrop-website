@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 // import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TrackingSection from './TrackingSection';
-import BookingModal from "./components/BookingModal";
+import BookingModal from "./BookingModal";
 
 const Header = ({ onBookNow }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
