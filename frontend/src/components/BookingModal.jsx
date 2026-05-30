@@ -6,21 +6,15 @@ export default function BookingModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     pickupLocation: "",
     pickupAddress: "",
-
     dropLocation: "",
     dropAddress: "",
-
     bags: "",
-
     pickupDate: "",
     deliveryDate: "",
-
     fullName: "",
     phone: "",
     email: "",
-
     flightNumber: "",
-
     specialInstructions: ""
   });
 
@@ -56,21 +50,15 @@ export default function BookingModal({ isOpen, onClose }) {
         setFormData({
           pickupLocation: "",
           pickupAddress: "",
-
           dropLocation: "",
           dropAddress: "",
-
           bags: "",
-
           pickupDate: "",
           deliveryDate: "",
-
           fullName: "",
           phone: "",
           email: "",
-
           flightNumber: "",
-
           specialInstructions: ""
         });
 
@@ -87,180 +75,185 @@ export default function BookingModal({ isOpen, onClose }) {
   };
 
   return (
-  <div className="fixed inset-0 bg-black/60 z-[9999]">
-  <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 z-[9999]">
+      <div className="flex h-screen items-center justify-center p-4 overflow-y-auto">
 
-    <div
-      className="bg-white
-                 w-full
-                 max-w-3xl
-                 rounded-xl
-                 shadow-xl
-                 p-6
-                 max-h-[90vh]
-                 overflow-y-auto"
-    >
+        <div className="bg-white w-full max-w-3xl rounded-xl shadow-xl p-6 max-h-[90vh] overflow-y-auto">
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-4"
-        >
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold">
+              Book BagDrop Service
+            </h2>
 
-          <h3 className="font-semibold text-lg">
-            Pickup Details
-          </h3>
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-2xl font-bold"
+            >
+              ×
+            </button>
+          </div>
 
-          <input
-            type="text"
-            name="pickupLocation"
-            placeholder="Pickup Location"
-            value={formData.pickupLocation}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <textarea
-            name="pickupAddress"
-            placeholder="Pickup Address"
-            value={formData.pickupAddress}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <h3 className="font-semibold text-lg">
-            Drop Details
-          </h3>
-
-          <input
-            type="text"
-            name="dropLocation"
-            placeholder="Drop Location"
-            value={formData.dropLocation}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <textarea
-            name="dropAddress"
-            placeholder="Drop Address"
-            value={formData.dropAddress}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <h3 className="font-semibold text-lg">
-            Baggage Information
-          </h3>
-
-          <input
-            type="number"
-            name="bags"
-            placeholder="Number of Bags"
-            value={formData.bags}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <h3 className="font-semibold text-lg">
-            Schedule
-          </h3>
-
-          <label className="block text-sm font-medium">
-            Preferred Pickup Date
-          </label>
-
-          <input
-            type="date"
-            name="pickupDate"
-            value={formData.pickupDate}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <label className="block text-sm font-medium">
-            Preferred Delivery Date
-          </label>
-
-          <input
-            type="date"
-            name="deliveryDate"
-            value={formData.deliveryDate}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <h3 className="font-semibold text-lg">
-            Customer Information
-          </h3>
-
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Mobile Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-
-          <input
-            type="text"
-            name="flightNumber"
-            placeholder="Flight Number (Optional)"
-            value={formData.flightNumber}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3"
-          />
-
-          <textarea
-            name="specialInstructions"
-            placeholder="Special Instructions"
-            value={formData.specialInstructions}
-            onChange={handleChange}
-            rows="4"
-            className="w-full border rounded-lg p-3"
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-semibold"
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4"
           >
-            {loading ? "Submitting..." : "Submit Booking Inquiry"}
-          </button>
 
-        </form>
+            <h3 className="font-semibold text-lg">
+              Pickup Details
+            </h3>
+
+            <input
+              type="text"
+              name="pickupLocation"
+              placeholder="Pickup Location"
+              value={formData.pickupLocation}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <textarea
+              name="pickupAddress"
+              placeholder="Pickup Address"
+              value={formData.pickupAddress}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <h3 className="font-semibold text-lg">
+              Drop Details
+            </h3>
+
+            <input
+              type="text"
+              name="dropLocation"
+              placeholder="Drop Location"
+              value={formData.dropLocation}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <textarea
+              name="dropAddress"
+              placeholder="Drop Address"
+              value={formData.dropAddress}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <h3 className="font-semibold text-lg">
+              Baggage Information
+            </h3>
+
+            <input
+              type="number"
+              name="bags"
+              placeholder="Number of Bags"
+              value={formData.bags}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <h3 className="font-semibold text-lg">
+              Schedule
+            </h3>
+
+            <label className="block text-sm font-medium">
+              Preferred Pickup Date
+            </label>
+
+            <input
+              type="date"
+              name="pickupDate"
+              value={formData.pickupDate}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <label className="block text-sm font-medium">
+              Preferred Delivery Date
+            </label>
+
+            <input
+              type="date"
+              name="deliveryDate"
+              value={formData.deliveryDate}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <h3 className="font-semibold text-lg">
+              Customer Information
+            </h3>
+
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Mobile Number"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full border rounded-lg p-3"
+            />
+
+            <input
+              type="text"
+              name="flightNumber"
+              placeholder="Flight Number (Optional)"
+              value={formData.flightNumber}
+              onChange={handleChange}
+              className="w-full border rounded-lg p-3"
+            />
+
+            <textarea
+              name="specialInstructions"
+              placeholder="Special Instructions"
+              value={formData.specialInstructions}
+              onChange={handleChange}
+              rows="4"
+              className="w-full border rounded-lg p-3"
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-semibold"
+            >
+              {loading ? "Submitting..." : "Submit Booking Inquiry"}
+            </button>
+
+          </form>
+
+        </div>
 
       </div>
-
     </div>
   );
 }
-
