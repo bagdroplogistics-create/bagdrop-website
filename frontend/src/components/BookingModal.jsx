@@ -1,147 +1,124 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { useToast } from '../hooks/use-toast';
+import React, { useState } from "react";
 
-const BookingModal = ({ isOpen, onClose }) => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    email: '',
-    phone: ''
+export default function BookingModal({ isOpen, onClose }) {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    airport: "",
+    pickup: "",
+    drop: "",
+    bags: ""
   });
-  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'Please enter your first name.';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'Please enter a valid email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number.';
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number.';
-    }
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateForm();
-    
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    // Mock submission
-    toast({
-      title: "Thank You!",
-      description: "Your booking inquiry has been received. We will contact you shortly.",
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
     });
-    
-    setFormData({ firstName: '', email: '', phone: '' });
-    setErrors({});
-    onClose();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch(
+      "https://your-api-endpoint.com/send-booking",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      }
+    );
+
+    if (response.ok) {
+      alert("Booking submitted successfully");
+      onClose();
+    }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-          <h2 className="text-2xl font-bold text-gray-900">Book Your Delivery</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
-          >
-            <X size={24} />
-          </button>
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-xl w-full max-w-lg">
+
+        <div className="flex justify-between mb-4">
+          <h2 className="text-xl font-bold">
+            Book BagDrop
+          </h2>
+
+          <button onClick={onClose}>✕</button>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
-          <div>
-            <Label htmlFor="firstName" className="text-gray-700 font-medium mb-2 block">
-              First Name <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="firstName"
-              name="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="w-full"
-              placeholder="Enter your first name"
-            />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-            )}
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
 
-          <div>
-            <Label htmlFor="email" className="text-gray-700 font-medium mb-2 block">
-              Email <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full"
-              placeholder="Enter your email"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
-          </div>
+          <input
+            name="name"
+            placeholder="Full Name"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
 
-          <div>
-            <Label htmlFor="phone" className="text-gray-700 font-medium mb-2 block">
-              Phone Number <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full"
-              placeholder="Enter your phone number"
-            />
-            {errors.phone && (
-              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-            )}
-          </div>
+          <input
+            name="phone"
+            placeholder="Phone Number"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
 
-          <Button
+          <input
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
+
+          <input
+            name="airport"
+            placeholder="Airport"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
+
+          <input
+            name="pickup"
+            placeholder="Pickup Location"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
+
+          <input
+            name="drop"
+            placeholder="Drop Location"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
+
+          <input
+            name="bags"
+            placeholder="Number of Bags"
+            required
+            onChange={handleChange}
+            className="w-full border p-3 rounded"
+          />
+
+          <button
             type="submit"
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 font-semibold text-lg transition-all duration-300 hover:shadow-lg"
+            className="w-full bg-orange-500 text-white py-3 rounded"
           >
-            Submit Booking Request
-          </Button>
+            Submit Booking
+          </button>
+
         </form>
+
       </div>
     </div>
   );
-};
-
-export default BookingModal;
+}
