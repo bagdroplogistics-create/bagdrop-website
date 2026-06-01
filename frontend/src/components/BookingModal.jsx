@@ -6,16 +6,18 @@ export default function BookingModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     pickupLocation: "",
     pickupAddress: "",
-    dropLocation: "",
-    dropAddress: "",
-    bags: "",
-    pickupDate: "",
+
+    dropOffLocation: "",
+    dropOffAddress: "",
+
+    numberOfBags: "",
+
+    preferredPickupDate: "",
     deliveryDate: "",
+
     fullName: "",
     phone: "",
-    email: "",
-    flightNumber: "",
-    specialInstructions: ""
+    email: ""
   });
 
   if (!isOpen) return null;
@@ -34,15 +36,20 @@ export default function BookingModal({ isOpen, onClose }) {
       setLoading(true);
 
       const response = await fetch(
-        "https://bagdrop-clean-backend.vercel.app/api/booking",
+        "https://bagdrop-website-backend.vercel.app/api/booking-inquiry",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({
+            ...formData,
+            numberOfBags: Number(formData.numberOfBags)
+          })
         }
       );
+
+      const result = await response.json();
 
       if (response.ok) {
         alert("Booking inquiry submitted successfully.");
@@ -50,21 +57,19 @@ export default function BookingModal({ isOpen, onClose }) {
         setFormData({
           pickupLocation: "",
           pickupAddress: "",
-          dropLocation: "",
-          dropAddress: "",
-          bags: "",
-          pickupDate: "",
+          dropOffLocation: "",
+          dropOffAddress: "",
+          numberOfBags: "",
+          preferredPickupDate: "",
           deliveryDate: "",
           fullName: "",
           phone: "",
-          email: "",
-          flightNumber: "",
-          specialInstructions: ""
+          email: ""
         });
 
         onClose();
       } else {
-        alert("Failed to submit inquiry.");
+        alert(result.detail || "Failed to submit inquiry.");
       }
     } catch (error) {
       console.error(error);
@@ -128,18 +133,18 @@ export default function BookingModal({ isOpen, onClose }) {
 
             <input
               type="text"
-              name="dropLocation"
+              name="dropOffLocation"
               placeholder="Drop Location"
-              value={formData.dropLocation}
+              value={formData.dropOffLocation}
               onChange={handleChange}
               required
               className="w-full border rounded-lg p-3"
             />
 
             <textarea
-              name="dropAddress"
+              name="dropOffAddress"
               placeholder="Drop Address"
-              value={formData.dropAddress}
+              value={formData.dropOffAddress}
               onChange={handleChange}
               required
               className="w-full border rounded-lg p-3"
@@ -151,11 +156,12 @@ export default function BookingModal({ isOpen, onClose }) {
 
             <input
               type="number"
-              name="bags"
+              name="numberOfBags"
               placeholder="Number of Bags"
-              value={formData.bags}
+              value={formData.numberOfBags}
               onChange={handleChange}
               required
+              min="1"
               className="w-full border rounded-lg p-3"
             />
 
@@ -169,8 +175,8 @@ export default function BookingModal({ isOpen, onClose }) {
 
             <input
               type="date"
-              name="pickupDate"
-              value={formData.pickupDate}
+              name="preferredPickupDate"
+              value={formData.preferredPickupDate}
               onChange={handleChange}
               required
               className="w-full border rounded-lg p-3"
@@ -220,24 +226,6 @@ export default function BookingModal({ isOpen, onClose }) {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border rounded-lg p-3"
-            />
-
-            <input
-              type="text"
-              name="flightNumber"
-              placeholder="Flight Number (Optional)"
-              value={formData.flightNumber}
-              onChange={handleChange}
-              className="w-full border rounded-lg p-3"
-            />
-
-            <textarea
-              name="specialInstructions"
-              placeholder="Special Instructions"
-              value={formData.specialInstructions}
-              onChange={handleChange}
-              rows="4"
               className="w-full border rounded-lg p-3"
             />
 
