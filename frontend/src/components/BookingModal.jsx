@@ -34,7 +34,7 @@ export default function BookingModal({ isOpen, onClose }) {
       setLoading(true);
 
       const response = await fetch(
-        "YOUR_BACKEND_BOOKING_API",
+        "https://bagdrop-clean-backend.vercel.app/api/booking",
         {
           method: "POST",
           headers: {
