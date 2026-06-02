@@ -151,16 +151,28 @@ export default function BookingModal({ isOpen, onClose }) {
                   min="1"
                   className="w-full border rounded-lg p-3"
                 />
+
+                                <div className="relative">
+                  <span className="text-xs text-gray-500">
+                    Preferred Pickup Date
+                  </span>
+                
+                  <input
+                    type="date"
+                    name="preferredPickupDate"
+                    value={formData.preferredPickupDate}
+                    onChange={handleChange}
+                    required
+                    className="w-full border rounded-lg p-3 mt-1"
+                  />
+                </div>
             
-                <input
-                  type="date"
-                  name="preferredPickupDate"
-                  value={formData.preferredPickupDate}
-                  onChange={handleChange}
-                  required
-                  className="w-full border rounded-lg p-3"
-                />
             
+                     <div className="relative">
+                  <span className="text-xs text-gray-500">
+                   Delivery Date
+                  </span> 
+                       
                 <input
                   type="date"
                   name="deliveryDate"
@@ -169,6 +181,7 @@ export default function BookingModal({ isOpen, onClose }) {
                   required
                   className="w-full border rounded-lg p-3"
                 />
+                 </div>
             
                 <input
                   type="text"
